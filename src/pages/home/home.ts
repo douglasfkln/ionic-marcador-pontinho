@@ -11,4 +11,7 @@ export class HomePage {
 
   }
 
+  addRoom() {
+    console.log("ADD ROOM");
+  }
 }
