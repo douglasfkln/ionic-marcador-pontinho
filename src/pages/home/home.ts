@@ -3,6 +3,7 @@ import { NavController } from 'ionic-angular';
 import { RoomAddPage } from '../room-add/room-add';
 import { PlayerAddPage } from '../player-add/player-add';
 import { HistoricPage } from '../historic/historic';
+import { PointsAddPage } from '../points-add/points-add';
 
 @Component({
   selector: 'page-home',
@@ -24,5 +25,9 @@ export class HomePage {
 
   toHistoric() {
     this.navCtrl.push(HistoricPage);
+  }
+
+  addPoints() {
+    this.navCtrl.push(PointsAddPage);
   }
 }
