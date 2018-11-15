@@ -10,6 +10,7 @@ import { HomePage } from '../pages/home/home';
 import { DatabaseProvider } from '../providers/database/database';
 import { RoomAddPageModule } from '../pages/room-add/room-add.module';
 import { PlayerAddPageModule } from '../pages/player-add/player-add.module';
+import { HistoricPageModule } from '../pages/historic/historic.module';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { PlayerAddPageModule } from '../pages/player-add/player-add.module';
     BrowserModule,
     IonicModule.forRoot(MyApp),
     RoomAddPageModule,
-    PlayerAddPageModule
+    PlayerAddPageModule,
+    HistoricPageModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [

@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { HomePage } from '../home/home';
 
 /**
- * Generated class for the PlayerAddPage page.
+ * Generated class for the HistoricPage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
@@ -11,19 +10,16 @@ import { HomePage } from '../home/home';
 
 @IonicPage()
 @Component({
-  selector: 'page-player-add',
-  templateUrl: 'player-add.html',
+  selector: 'page-historic',
+  templateUrl: 'historic.html',
 })
-export class PlayerAddPage {
+export class HistoricPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad PlayerAddPage');
+    console.log('ionViewDidLoad HistoricPage');
   }
 
-  savePlayer() {
-    this.navCtrl.setRoot(HomePage);
-  }
 }

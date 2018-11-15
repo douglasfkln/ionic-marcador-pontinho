@@ -12,7 +12,21 @@
 
 </ion-header>
 
-
-<ion-content padding>
-
+<ion-content>
+  <ion-list>
+    <ion-item>
+      <ion-label floating>Nome do Jogador</ion-label>
+      <ion-input type="text"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Pontos de Entrada</ion-label>
+      <ion-input type="text"></ion-input>
+    </ion-item>
+    <div padding>
+      <button ion-button icon-end full color="secondary" (click)="savePlayer()">
+        Salvar
+        <ion-icon name="checkmark"></ion-icon>
+      </button>
+    </div>
+  </ion-list>
 </ion-content>
