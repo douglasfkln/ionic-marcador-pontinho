@@ -4,6 +4,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { HomePage } from '../pages/home/home';
+import { RoomAddPage } from '../pages/room-add/room-add';
 import { DatabaseProvider } from '../providers/database/database';
 
 @Component({
@@ -13,6 +14,7 @@ export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
   rootPage: any = HomePage;
+  // rootPage: any = RoomAddPage;
 
   pages: Array<{title: string, component: any}>;
 

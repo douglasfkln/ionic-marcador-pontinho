@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
+import { RoomAddPage } from '../room-add/room-add';
 
 @Component({
   selector: 'page-home',
@@ -12,6 +13,6 @@ export class HomePage {
   }
 
   addRoom() {
-    console.log("ADD ROOM");
+    this.navCtrl.push(RoomAddPage);
   }
 }
