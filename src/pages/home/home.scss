@@ -6,4 +6,11 @@ page-home {
     font-size: 10em;
     margin-top: 50%;
   }
+  .card-user {
+    position: relative;
+  }
+  .card-user .fab {
+    top: -5px;
+    left: 5px;
+  }
 }
