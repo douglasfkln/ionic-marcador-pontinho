@@ -15,4 +15,5 @@ export class HomePage {
   addRoom() {
     this.navCtrl.push(RoomAddPage);
   }
+  
 }
