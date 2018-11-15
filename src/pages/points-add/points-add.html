@@ -1,0 +1,55 @@
+<!--
+  Generated template for the PointsAddPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Adicionar Pontuação</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+  <ion-list>
+    <ion-item>
+      <ion-label floating>Pontuação</ion-label>
+      <ion-input type="number"></ion-input>
+    </ion-item>
+    <br>
+    <ion-card class="card-user">
+      <ion-item>
+        <span item-start>11 <small>Pontos</small></span>
+        <span item-start>89/100</span>
+        <button ion-button icon-start clear >
+          <ion-icon name="money"></ion-icon>
+          R$ 5,00
+        </button>
+        <button ion-button color="dark" icon-start clear item-end (click)="toHistoric()">
+          <ion-icon name="list"></ion-icon>
+        </button>
+      </ion-item>
+    </ion-card>
+    <div padding-10>
+      <button ion-button icon-end class="left" color="secondary" (click)="bateu()">
+        Bateu a Rodada
+        <ion-icon name="checkmark"></ion-icon>
+      </button>
+      <button ion-button icon-end class="right" color="default" (click)="savePoints()">
+        Salvar Pontos
+        <ion-icon name="add"></ion-icon>
+      </button>
+      <!-- <button ion-button icon-end full color="default" (click)="savePoints()">
+        Entrar com X pontos
+        <ion-icon name="checkmark"></ion-icon>
+      </button>
+      <button ion-button icon-end full color="danger">
+        Sair da Partida
+        <ion-icon name="close"></ion-icon>
+      </button> -->
+    </div>
+  </ion-list>
+</ion-content>

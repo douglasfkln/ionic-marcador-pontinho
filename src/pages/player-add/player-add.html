@@ -1,0 +1,32 @@
+<!--
+  Generated template for the PlayerAddPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Adicionar Jogador</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item>
+      <ion-label floating>Nome do Jogador</ion-label>
+      <ion-input type="text"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Pontos de Entrada</ion-label>
+      <ion-input type="text"></ion-input>
+    </ion-item>
+    <div padding>
+      <button ion-button icon-end full color="secondary" (click)="savePlayer()">
+        Salvar
+        <ion-icon name="checkmark"></ion-icon>
+      </button>
+    </div>
+  </ion-list>
+</ion-content>

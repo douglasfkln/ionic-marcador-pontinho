@@ -9,8 +9,60 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-  <div class="add-room">
+<ion-content>
+  <!-- <div class="add-room">
     <ion-icon name="add-circle" (click)="addRoom()"></ion-icon>
+  </div> -->
+  <ion-card class="card-user">
+    <ion-fab right top>
+      <button ion-fab (click)="addPoints()">
+        <ion-icon name="add"></ion-icon>
+      </button>
+    </ion-fab>
+    <ion-item>
+      <ion-icon name="person" item-start large></ion-icon>
+      <h2>Douglas</h2>
+      <p>3 Batidas</p>
+    </ion-item>
+    <ion-item>
+      <span item-start>11 <small>Pontos</small></span>
+      <span item-start>89/100</span>
+      <button ion-button icon-start clear >
+        <ion-icon name="money"></ion-icon>
+        R$ 5,00
+      </button>
+      <button ion-button color="dark" icon-start clear item-end (click)="toHistoric()">
+        <ion-icon name="list"></ion-icon>
+      </button>
+    </ion-item>
+  </ion-card>
+  <ion-card class="card-user">
+    <ion-fab right top>
+      <button ion-fab (click)="addPoints()">
+        <ion-icon name="add"></ion-icon>
+      </button>
+    </ion-fab>
+    <ion-item>
+      <ion-icon name="person" item-start large></ion-icon>
+      <h2>Douglas</h2>
+      <p>3 Batidas</p>
+    </ion-item>
+    <ion-item>
+      <span item-start>11 <small>Pontos</small></span>
+      <span item-start>89/100</span>
+      <button ion-button icon-start clear >
+        <ion-icon name="money"></ion-icon>
+        R$ 5,00
+      </button>
+      <button ion-button color="dark" icon-start clear item-end (click)="toHistoric()">
+        <ion-icon name="list"></ion-icon>
+      </button>
+    </ion-item>
+  </ion-card>
+  <div padding-10>
+    <button ion-button icon-end full (click)="addPlayer()">
+      Adicionar Jogador
+      <ion-icon name="add"></ion-icon>
+    </button>
   </div>
 </ion-content>
