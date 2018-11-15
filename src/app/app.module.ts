@@ -12,6 +12,7 @@ import { RoomAddPageModule } from '../pages/room-add/room-add.module';
 import { PlayerAddPageModule } from '../pages/player-add/player-add.module';
 import { HistoricPageModule } from '../pages/historic/historic.module';
 import { PointsAddPageModule } from '../pages/points-add/points-add.module';
+import { RoomsPageModule } from '../pages/rooms/rooms.module';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { PointsAddPageModule } from '../pages/points-add/points-add.module';
     RoomAddPageModule,
     PlayerAddPageModule,
     HistoricPageModule,
-    PointsAddPageModule
+    PointsAddPageModule,
+    RoomsPageModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
