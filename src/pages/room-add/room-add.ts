@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ToastController, AlertController } from 'ionic-angular';
 import { HomePage } from '../home/home';
+
+import { Partida } from '../../class/partida';
+import { DaoPartidaProvider } from '../../providers/dao-partida/dao-partida';
 
 /**
  * Generated class for the RoomAddPage page.
@@ -16,7 +19,14 @@ import { HomePage } from '../home/home';
 })
 export class RoomAddPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  public partida: Partida;
+
+  constructor(public navCtrl: NavController,
+              public navParams: NavParams,
+              public daoPartida: DaoPartidaProvider,
+              public toast: ToastController,
+              public alertCtrl: AlertController) {
+    this.partida = new Partida();
   }
 
   ionViewDidLoad() {
@@ -24,6 +34,46 @@ export class RoomAddPage {
   }
 
   saveRoom() {
-    this.navCtrl.setRoot(HomePage);
+
+    if (this.partida.NOME == null || this.partida.NOME == undefined) {
+      this.alertCtrl.create({
+        title: 'Atenção!',
+        subTitle: 'Informe o nome da Partida!',
+        buttons: [ {
+          text: 'Ok'
+        }]
+      }).present();
+      return false;
+    }
+
+    if (this.partida.VALOR_REENTRADA == null || this.partida.VALOR_REENTRADA == '') {
+      this.partida.setValor_reentrada(0);
+    }
+    if (this.partida.TIPO_REENTRADA == null || this.partida.TIPO_REENTRADA == undefined) {
+      this.partida.setTipo_reentrada(1);
+    }
+
+    this.partida.setStatus("NOVA");
+    this.partida.setData(new Date());
+    // console.log(this.partida);
+    
+    this.daoPartida.insert(this.partida).then((data:any) => {
+      this.partida.setId(data.ID);
+      this.toast.create({
+        message: 'Partida criada com sucesso!',
+        duration: 1500,
+        position: 'botton'
+      }).present();
+      this.navCtrl.pop();
+    })
+    .catch((e) => {
+      console.error(e)
+      this.toast.create({
+        message: e,
+        duration: 1500,
+        position: 'botton'
+      }).present();
+    });
+    // this.navCtrl.setRoot(HomePage);
   }
 }

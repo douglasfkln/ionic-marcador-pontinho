@@ -3,8 +3,33 @@ import { Injectable } from '@angular/core';
 import { SQLite } from '@ionic-native/sqlite'
 import { Platform } from 'ionic-angular';
 
-const DB_NAME: string = 'nome_do_banco.db';
+const DB_NAME: string = 'marcador_pontinho.db';
 const win: any = window;
+const TABLE_PARTIDAS = "CREATE TABLE IF NOT EXISTS PARTIDAS ("+
+                        	"ID	INTEGER PRIMARY KEY AUTOINCREMENT,"+
+                        	"NOME	TEXT,"+
+                        	"STATUS	TEXT,"+
+                        	"DATA	TEXT,"+
+                        	"VALOR_REENTRADA	REAL,"+
+                        	"TIPO_REENTRADA	INTEGER"+
+                        ")";
+const TABLE_JOGADORES = "CREATE TABLE IF NOT EXISTS JOGADORES ("+
+                        	"ID	INTEGER PRIMARY KEY AUTOINCREMENT,"+
+                        	"NOME	TEXT,"+
+                        	"STATUS	TEXT,"+
+                        	"PONTOS_ENTRADA	INTEGER,"+
+                        	"PARTIDAS_ID	INTEGER,"+
+                        	"FOREIGN KEY (PARTIDAS_ID) REFERENCES PARTIDAS(ID)"+
+                        ")";
+const TABLE_PONTUACAO = "CREATE TABLE IF NOT EXISTS PONTUACAO ("+
+                        	"ID	INTEGER PRIMARY KEY AUTOINCREMENT,"+
+                        	"PONTO	INTEGER,"+
+                        	"BATEU	INTEGER,"+
+                        	"STATUS	TEXT,"+
+                        	"VALOR_REENTRADA	REAL,"+
+                        	"JOGADORES_ID	INTEGER,"+
+                        	"FOREIGN KEY (JOGADORES_ID) REFERENCES JOGADORES(ID)"+
+                        ")";
 
 /*
   Generated class for the DatabaseProvider provider.
@@ -42,7 +67,7 @@ export class DatabaseProvider {
     this.createTables();
 
     // // Seta configurações padrões
-    this.setConfigs();
+    // this.setConfigs();
   }
 
   
@@ -54,7 +79,10 @@ export class DatabaseProvider {
     // Criando as tabelas
     // sqlBatch podeexecutar mais de uma query
     // Em caso de erro, todas as alterações em um lote sql serão descartadas automaticamente usando ROLLBACK.
-    this.query('CREATE TABLE IF NOT EXISTS TESTE (ID INTEGER PRIMARY KEY AUTOINCREMENT, NAME TEXT)');
+    this.query(TABLE_PARTIDAS);
+    this.query(TABLE_JOGADORES);
+    this.query(TABLE_PONTUACAO);
+    // this.query('CREATE TABLE IF NOT EXISTS PARTIDAS (ID	INTEGER PRIMARY KEY AUTOINCREMENT, NOME	TEXT, STATUS	TEXT, DATA	TEXT, VALOR_REENTRADA	REAL, TIPO_REENTRADA	INTEGER)');
   }
   
   public async query(query: string, params: any[] = []): Promise<any> {

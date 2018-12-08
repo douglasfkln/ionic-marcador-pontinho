@@ -7,41 +7,43 @@
 <ion-header>
 
   <ion-navbar>
-    <button ion-button menuToggle>
+    <!-- <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
-    </button>
-    <ion-title>Criar Mesa</ion-title>
+    </button> -->
+    <ion-title>Criar Partida</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content>
-  <ion-list>
-    <ion-item>
-      <ion-label floating>Dê um nome</ion-label>
-      <ion-input type="text"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label floating>Valor (R$)</ion-label>
-      <ion-input type="text"></ion-input>
-    </ion-item>
-    <ion-list radio-group>
-      <h5 padding>Valor da reentrada</h5>
+  <form>
+    <ion-list>
       <ion-item>
-        <ion-label>Somar o valor da entrada</ion-label>
-        <ion-radio checked="true" name="reentrada" value="go"></ion-radio>
+        <ion-label floating>Dê um nome</ion-label>
+        <ion-input type="text" [(ngModel)]="partida.NOME" name="NOME"></ion-input>
       </ion-item>
       <ion-item>
-        <ion-label>Dobrar o valor da entrada</ion-label>
-        <ion-radio value="rust" name="reentrada"></ion-radio>
+        <ion-label floating>Valor (R$)</ion-label>
+        <ion-input [brmasker]="{money:true, decimal:2}" type="text" name="VALOR_REENTRADA" [(ngModel)]="partida.VALOR_REENTRADA"></ion-input>
       </ion-item>
+      <ion-list radio-group [(ngModel)]="partida.TIPO_REENTRADA" name="TIPO_REENTRADA">
+        <h5 padding>Valor da reentrada</h5>
+        <ion-item>
+          <ion-label>Somar o valor da entrada</ion-label>
+          <ion-radio name="tipo_reentrada" value="1"></ion-radio>
+        </ion-item>
+        <ion-item>
+          <ion-label>Dobrar o valor da entrada</ion-label>
+          <ion-radio name="tipo_reentrada" value="2"></ion-radio>
+        </ion-item>
+      </ion-list>
     </ion-list>
-  </ion-list>
-  <div padding>
-    <button ion-button icon-end full color="secondary" (click)="saveRoom()">
-      Salvar
-      <ion-icon name="checkmark"></ion-icon>
-    </button>
-  </div>
+    <div padding>
+      <button ion-button icon-end full color="secondary" (click)="saveRoom()">
+        Salvar
+        <ion-icon name="checkmark"></ion-icon>
+      </button>
+    </div>
+  </form>
 </ion-content>
