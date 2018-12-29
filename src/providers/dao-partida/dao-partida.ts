@@ -39,30 +39,28 @@ export class DaoPartidaProvider {
   }
 
   get(id) {
-    // return this.dbProvider.getDB()
-    //               .then((db: SQLiteObject) => {
-    //                 return db.executeSql('SELECT * FROM LANCAMENTOS WHERE ID = ?', [id])
-    //                          .then((data: any) => {
-    //                            console.log("Lançamento");
-    //                            console.log(data);
-    //                            if (data.rows.length > 0) {
-    //                              let item = data.rows.item(0);
-    //                              let lancamento = new Lancamento();
-    //                              lancamento.ID = item.ID;
-    //                              lancamento.DESCRICAO = item.DESCRICAO;
-    //                              lancamento.VALOR = item.VALOR;
-    //                              lancamento.REFERENCIA_MES = item.REFERENCIA_MES;
-    //                              lancamento.REFERENCIA_ANO = item.REFERENCIA_ANO;
-    //                              lancamento.CONTA = item.CONTA_ID;
-    //                              lancamento.TIPO = item.TIPO;
-    //                              lancamento.PAGO = item.PAGO;
-    //                              return lancamento;
-    //                            }
-    //                            return null;
-    //                          })
-    //                          .catch(e => console.error("Erro ao buscar lançamento", e));
-    //               })
-    //               .catch(e => console.error("Erro ao abrir banco", e));
+    let query = ""
+    if (id == -1) {
+      query = 'SELECT * FROM PARTIDAS ORDER BY ID DESC';
+    } else {
+      query = 'SELECT * FROM PARTIDAS WHERE ID = '+id;
+    }
+    return this.dbProvider.query(query)
+              .then((data: any) => {
+                if (data.res.rows.length > 0) {
+                  let item = data.res.rows.item(0);
+                  let partida = new Partida();
+                  partida.ID = item.ID;
+                  partida.NOME = item.NOME;
+                  partida.STATUS = item.STATUS;
+                  partida.DATA = item.DATA;
+                  partida.VALOR_REENTRADA = item.VALOR_REENTRADA;
+                  partida.TIPO_REENTRADA = item.TIPO_REENTRADA;
+                  return partida;
+                }
+                return null;
+              })
+              .catch(e => console.error("Erro ao buscar partida", e));
   }
 
   insert(partida) {
@@ -74,20 +72,36 @@ export class DaoPartidaProvider {
                .catch(e => console.error(e));
   }
 
-  update(lancamento) {
-    return this.dbProvider.getDB()
-               .then((db: SQLiteObject) => {
-                  return db.executeSql("UPDATE LANCAMENTOS SET DESCRICAO = ?, VALOR = ?, REFERENCIA_MES = ?, REFERENCIA_ANO = ?, CONTA_ID = ?, TIPO = ?, PAGO = ? WHERE ID = ?", [lancamento.DESCRICAO, lancamento.VALOR, lancamento.REFERENCIA_MES, lancamento.REFERENCIA_ANO, lancamento.CONTA, lancamento.TIPO, lancamento.PAGO, lancamento.ID])
-                            .catch(e => console.error("Erro ao atualizar lançamento", e));
+  insertJogador(jogador) {
+    return this.dbProvider.query("INSERT INTO JOGADORES (NOME, STATUS, PONTOS_ENTRADA, PARTIDAS_ID) VALUES (?, ?, ?, ?)", [jogador.NOME, jogador.STATUS, jogador.PONTOS_ENTRADA, jogador.PARTIDAS_ID])
+               .then((data:any) => {
+                jogador.ID = data.res.insertId;
+                return jogador;
                })
-               .catch(e => console.error("Erro ao brir banco", e));
+               .catch(e => console.error(e));
+  }
+
+  update(lancamento) {
+    // return this.dbProvider.query("UPDATE LANCAMENTOS SET DESCRICAO = ?, VALOR = ?, REFERENCIA_MES = ?, REFERENCIA_ANO = ?, CONTA_ID = ?, TIPO = ?, PAGO = ? WHERE ID = ?", [lancamento.DESCRICAO, lancamento.VALOR, lancamento.REFERENCIA_MES, lancamento.REFERENCIA_ANO, lancamento.CONTA, lancamento.TIPO, lancamento.PAGO, lancamento.ID]).catch(e => console.error("Erro ao atualizar lançamento", e));
   }
 
   delete(id) {
-    return this.dbProvider.getDB()
-               .then((db:SQLiteObject) => {
-                 return db.executeSql("DELETE FROM LANCAMENTOS WHERE ID = ?", [id]).catch(e => console.error(e));
-               })
-               .catch(e => console.error(e));
+    // return this.dbProvider.query("DELETE FROM LANCAMENTOS WHERE ID = ?", [id]).catch(e => console.error(e));
+  }
+
+  getJogadores(partida_id) {
+    return this.dbProvider.query("SELECT * FROM JOGADORES WHERE PARTIDAS_ID = ?", [partida_id])
+              .then((data: any) => {
+                if (data.res.rows.length > 0) {
+                  let jogadores:any[] = [];
+                  for (var i=0; i < data.res.rows.length; i++) {
+                    let jogador = data.res.rows.item(i);
+                    jogadores.push(jogador);
+                  }
+                  return jogadores;
+                }
+                return null;
+              })
+              .catch(e => console.error(e));
   }
 }

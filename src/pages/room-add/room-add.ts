@@ -55,7 +55,6 @@ export class RoomAddPage {
 
     this.partida.setStatus("NOVA");
     this.partida.setData(new Date());
-    // console.log(this.partida);
     
     this.daoPartida.insert(this.partida).then((data:any) => {
       this.partida.setId(data.ID);
@@ -64,7 +63,7 @@ export class RoomAddPage {
         duration: 1500,
         position: 'botton'
       }).present();
-      this.navCtrl.pop();
+      this.navCtrl.setRoot(HomePage, {"room_id":data.ID});
     })
     .catch((e) => {
       console.error(e)
@@ -74,6 +73,5 @@ export class RoomAddPage {
         position: 'botton'
       }).present();
     });
-    // this.navCtrl.setRoot(HomePage);
   }
 }

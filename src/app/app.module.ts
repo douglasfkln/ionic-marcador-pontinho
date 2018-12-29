@@ -15,6 +15,7 @@ import { RoomsPageModule } from '../pages/rooms/rooms.module';
 
 import { DatabaseProvider } from '../providers/database/database';
 import { DaoPartidaProvider } from '../providers/dao-partida/dao-partida';
+import { ToastProvider } from '../providers/toast/toast';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { DaoPartidaProvider } from '../providers/dao-partida/dao-partida';
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     SQLite,
     DatabaseProvider,
-    DaoPartidaProvider
+    DaoPartidaProvider,
+    ToastProvider
   ]
 })
 export class AppModule {}

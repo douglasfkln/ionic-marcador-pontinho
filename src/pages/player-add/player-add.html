@@ -16,11 +16,11 @@
   <ion-list>
     <ion-item>
       <ion-label floating>Nome do Jogador</ion-label>
-      <ion-input type="text"></ion-input>
+      <ion-input type="text" name="NOME" [(ngModel)]="jogador.NOME"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label floating>Pontos de Entrada</ion-label>
-      <ion-input type="text"></ion-input>
+      <ion-input type="text" name="PONTOS_ENTRADA" [(ngModel)]="jogador.PONTOS_ENTRADA"></ion-input>
     </ion-item>
     <div padding>
       <button ion-button icon-end full color="secondary" (click)="savePlayer()">
