@@ -34,7 +34,6 @@ export class HomePage {
         this.daoPartida.getJogadores(result.ID)
           .then((result: any) => {
             this.listJogadores = result;
-            console.log(this.listJogadores);
           });
       });
   }
@@ -51,7 +50,7 @@ export class HomePage {
     this.navCtrl.push(HistoricPage);
   }
 
-  addPoints() {
-    this.navCtrl.push(PointsAddPage);
+  addPoints(jogador_id) {
+    this.navCtrl.push(PointsAddPage, {"partida_id":this.partida.ID, "jogador_id":jogador_id});
   }
 }

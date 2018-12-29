@@ -81,6 +81,15 @@ export class DaoPartidaProvider {
                .catch(e => console.error(e));
   }
 
+  insertPontuacao(pontuacao) {
+    return this.dbProvider.query("INSERT INTO PONTUACAO (PONTO, STATUS, BATEU, VALOR_REENTRADA, JOGADORES_ID) VALUES (?, ?, ?, ?, ?)", [pontuacao.PONTO, pontuacao.STATUS, pontuacao.BATEU, pontuacao.VALOR_REENTRADA, pontuacao.JOGADORES_ID])
+               .then((data:any) => {
+                pontuacao.ID = data.res.insertId;
+                return pontuacao;
+               })
+               .catch(e => console.error(e));
+  }
+
   update(lancamento) {
     // return this.dbProvider.query("UPDATE LANCAMENTOS SET DESCRICAO = ?, VALOR = ?, REFERENCIA_MES = ?, REFERENCIA_ANO = ?, CONTA_ID = ?, TIPO = ?, PAGO = ? WHERE ID = ?", [lancamento.DESCRICAO, lancamento.VALOR, lancamento.REFERENCIA_MES, lancamento.REFERENCIA_ANO, lancamento.CONTA, lancamento.TIPO, lancamento.PAGO, lancamento.ID]).catch(e => console.error("Erro ao atualizar lançamento", e));
   }
@@ -90,12 +99,33 @@ export class DaoPartidaProvider {
   }
 
   getJogadores(partida_id) {
-    return this.dbProvider.query("SELECT * FROM JOGADORES WHERE PARTIDAS_ID = ?", [partida_id])
+    return this.dbProvider.query("SELECT * FROM JOGADORES WHERE PARTIDAS_ID = ? ORDER BY ID ASC", [partida_id])
               .then((data: any) => {
                 if (data.res.rows.length > 0) {
                   let jogadores:any[] = [];
                   for (var i=0; i < data.res.rows.length; i++) {
                     let jogador = data.res.rows.item(i);
+                    jogador.TOTAL_PONTOS = 0;
+                    jogador.TOTAL_BATIDAS = 0;
+
+                    this.dbProvider.query("SELECT SUM(PONTO) AS PONTOS FROM PONTUACAO WHERE JOGADORES_ID = ?", [jogador.ID])
+                                  .then((result: any) => {
+                                    if (result.res.rows.length > 0) {
+                                      for (var i=0; i < result.res.rows.length; i++) {
+                                        jogador.TOTAL_PONTOS = result.res.rows.item(i).PONTOS;
+                                      }
+                                    }
+                                  })
+                                  .catch(e => console.error(e));
+                    this.dbProvider.query("SELECT COUNT(ID) AS BATIDAS FROM PONTUACAO WHERE JOGADORES_ID = ? AND BATEU = 'S'", [jogador.ID])
+                                  .then((result: any) => {
+                                    if (result.res.rows.length > 0) {
+                                      for (var i=0; i < result.res.rows.length; i++) {
+                                        jogador.TOTAL_BATIDAS = result.res.rows.item(i).BATIDAS;
+                                      }
+                                    }
+                                  })
+                                  .catch(e => console.error(e));
                     jogadores.push(jogador);
                   }
                   return jogadores;

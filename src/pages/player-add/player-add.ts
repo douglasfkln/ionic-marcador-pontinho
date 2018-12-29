@@ -64,6 +64,5 @@ export class PlayerAddPage {
         position: 'botton'
       }).present();
     });
-    this.navCtrl.setRoot(HomePage);
   }
 }

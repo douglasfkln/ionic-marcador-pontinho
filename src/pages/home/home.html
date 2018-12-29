@@ -12,21 +12,21 @@
 <ion-content>
   <ion-card class="card-user" *ngFor="let jogador of listJogadores">
     <ion-fab right top>
-      <button ion-fab (click)="addPoints()">
+      <button ion-fab (click)="addPoints(jogador.ID)">
         <ion-icon name="add"></ion-icon>
       </button>
     </ion-fab>
     <ion-item>
       <ion-icon name="person" item-start large></ion-icon>
       <h2>{{jogador.NOME}}</h2>
-      <p>3 Batidas</p>
+      <p>{{jogador.TOTAL_BATIDAS}} Batidas</p>
     </ion-item>
     <ion-item>
-      <span item-start>{{jogador.PONTOS_ENTRADA}} <small>Pontos</small></span>
-      <span item-start>{{100-jogador.PONTOS_ENTRADA}}/100</span>
+      <span item-start><span style="color: red; font-weight: bold; font-size: 1.5em">{{jogador.TOTAL_PONTOS}}</span> <small>Pontos</small></span>
+      <span item-start><span style="color: green; font-weight: bold; font-size: 1.5em">{{99-jogador.TOTAL_PONTOS}}</span>/100</span>
       <button ion-button icon-start clear >
         <ion-icon name="money"></ion-icon>
-        R$ 5,00
+        <span style="font-size: 1.5em">R$ 5,00</span>
       </button>
       <button ion-button color="dark" icon-start clear item-end (click)="toHistoric()">
         <ion-icon name="list"></ion-icon>
